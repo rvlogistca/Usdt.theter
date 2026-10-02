@@ -1,0 +1,106 @@
+.ustd-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    max-width: 520px;
+    padding: 18px;
+
+    background: linear-gradient(
+        135deg,
+        #031c15,
+        #07583f,
+        #02271d
+    );
+
+    border: 1px solid #cda84d;
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, .35),
+        inset 0 0 20px rgba(25, 220, 160, .08);
+
+    color: white;
+}
+
+.ustd-logo {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+
+    filter:
+        drop-shadow(0 0 8px rgba(20, 220, 160, .35));
+}
+
+.ustd-info {
+    flex: 1;
+}
+
+.ustd-info h3 {
+    margin: 0;
+    font-size: 28px;
+    color: #f5d77b;
+    letter-spacing: 3px;
+}
+
+.ustd-info span {
+    color: #9ee8cc;
+    font-size: 13px;
+}
+
+.contract-box {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+
+    background: rgba(0,0,0,.35);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.contract-box code {
+    padding: 9px;
+    font-size: 10px;
+    color: #b9f5df;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.contract-box button {
+    border: 0;
+    background: #c79b38;
+    color: #111;
+    padding: 9px 12px;
+    cursor: pointer;
+}
+
+.ustd-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.wallet-btn,
+.explorer-btn {
+    border: 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.wallet-btn {
+    background: linear-gradient(135deg, #e8c45b, #a97419);
+    color: #111;
+}
+
+.explorer-btn {
+    background: rgba(255,255,255,.1);
+    border: 1px solid #cda84d;
+    color: #f5d77b;
+}
