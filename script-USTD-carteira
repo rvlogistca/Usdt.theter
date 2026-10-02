@@ -1,0 +1,128 @@
+from pathlib import Path
+import zipfile
+
+base = Path("/mnt/data")
+
+script = r'''(() => {
+  "use strict";
+
+  const TOKEN = {
+    address: "0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655",
+    symbol: "USTD",
+    decimals: 18,
+    image: "./ustd-icon.svg"
+  };
+
+  // Carteira informada para referência/destino:
+  const WALLET_ADDRESS = "0x26Ef6c3AF50240F211E774213914f8DB526fA77d";
+
+  const $ = (id) => document.getElementById(id);
+
+  const copyBtn = $("copyBtn");
+  const copyStatus = $("copyStatus");
+  const addWalletBtn = $("addWalletBtn");
+  const walletStatus = $("walletStatus");
+
+  async function copyText(text, successMessage) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      let ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } catch {
+        ok = false;
+      }
+
+      textarea.remove();
+      return ok;
+    }
+  }
+
+  async function copyContract() {
+    const ok = await copyText(TOKEN.address);
+
+    copyStatus.textContent = ok
+      ? "Contrato copiado."
+      : "Não foi possível copiar automaticamente.";
+
+    if (ok) {
+      copyBtn.textContent = "✓";
+      setTimeout(() => {
+        copyStatus.textContent = "";
+        copyBtn.textContent = "⧉";
+      }, 2200);
+    }
+  }
+
+  async function addTokenToWallet() {
+    walletStatus.textContent = "";
+
+    if (!window.ethereum) {
+      walletStatus.textContent =
+        "Carteira Ethereum não detectada. Abra esta página pelo navegador da sua carteira.";
+      return;
+    }
+
+    try {
+      const added = await window.ethereum.request({
+        method: "wallet_watchAsset",
+        params: {
+          type: "ERC20",
+          options: {
+            address: TOKEN.address,
+            symbol: TOKEN.symbol,
+            decimals: TOKEN.decimals,
+            image: new URL(TOKEN.image, window.location.href).href
+          }
+        }
+      });
+
+      walletStatus.textContent = added
+        ? "USTD enviado para adição à carteira."
+        : "A carteira não confirmou a adição.";
+    } catch (error) {
+      console.error(error);
+      walletStatus.textContent =
+        "Não foi possível adicionar automaticamente. Tente novamente pela carteira.";
+    }
+  }
+
+  // Disponibiliza o endereço informado para outros elementos do site.
+  window.USTD = {
+    token: TOKEN,
+    wallet: WALLET_ADDRESS,
+    copyWallet: async () => {
+      const ok = await copyText(WALLET_ADDRESS);
+      walletStatus.textContent = ok
+        ? "Endereço da carteira copiado."
+        : "Não foi possível copiar o endereço da carteira.";
+    }
+  };
+
+  copyBtn?.addEventListener("click", copyContract);
+  addWalletBtn?.addEventListener("click", addTokenToWallet);
+})();
+'''
+
+js_path = base / "script.js"
+js_txt_path = base / "script.js.txt"
+zip_path = base / "script-USTD-carteira.zip"
+
+js_path.write_text(script, encoding="utf-8")
+js_txt_path.write_text(script, encoding="utf-8")
+
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    z.write(js_path, "script.js")
+
+print(js_path)
+print(js_txt_path)
+print(zip_path)
