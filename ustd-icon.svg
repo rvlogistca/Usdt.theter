@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+<title id="title">USTD token icon</title>
+<desc id="desc">Ícone circular verde e dourado do USTD.</desc>
+<defs>
+<radialGradient id="g" cx="38%" cy="30%" r="75%"><stop offset="0" stop-color="#16a878"/><stop offset=".55" stop-color="#07533f"/><stop offset="1" stop-color="#021e17"/></radialGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff2b8"/><stop offset=".25" stop-color="#f5c85b"/><stop offset=".55" stop-color="#fff0a6"/><stop offset="1" stop-color="#a86b12"/></linearGradient>
+<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-opacity=".45"/></filter>
+</defs>
+<circle cx="128" cy="128" r="121" fill="#031711" stroke="url(#gold)" stroke-width="7" filter="url(#shadow)"/>
+<circle cx="128" cy="128" r="108" fill="url(#g)" stroke="#d7a943" stroke-width="3"/>
+<circle cx="128" cy="128" r="94" fill="none" stroke="#13c997" stroke-opacity=".38" stroke-width="2" stroke-dasharray="3 7"/>
+<g fill="none" stroke="#12c99a" stroke-opacity=".35" stroke-width="2">
+<path d="M43 91h22l12-12h20M213 91h-22l-12-12h-20M43 165h22l12 12h20M213 165h-22l-12 12h-20"/>
+<circle cx="77" cy="79" r="3" fill="#12c99a"/><circle cx="179" cy="79" r="3" fill="#12c99a"/>
+<circle cx="77" cy="177" r="3" fill="#12c99a"/><circle cx="179" cy="177" r="3" fill="#12c99a"/>
+</g>
+<g fill="url(#gold)" stroke="#8b5b12" stroke-width="1.5">
+<path d="M76 78h104v18h-42v61h-20V96H76z"/>
+<ellipse cx="128" cy="115" rx="57" ry="15" fill="none" stroke="url(#gold)" stroke-width="10"/>
+</g>
+<text x="128" y="184" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="800" letter-spacing="3" fill="url(#gold)" stroke="#70480b" stroke-width=".7">USTD</text>
+<circle cx="128" cy="128" r="113" fill="none" stroke="#25e2ad" stroke-opacity=".25" stroke-width="2"/>
+</svg>
