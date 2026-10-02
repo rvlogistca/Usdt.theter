@@ -1,91 +1,88 @@
-<div class="ustd-card">
-
+<div class="usdt-card">
   <img
-    src="./ustd-icon.svg"
-    alt="USTD"
-    class="ustd-logo"
+    src="./usdt-icon.svg"
+    alt="USDT"
+    class="usdt-logo"
   >
 
-  <div class="ustd-info">
-    <h3>USTD</h3>
-    <span>USD Stable Token</span>
+  <div class="usdt-info">
+    <h3>USDT</h3>
+    <span>Tether USD • Stablecoin</span>
 
-    <div class="contract-box">
-      <code id="ustdAddress">
-        0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655
+    <div class="wallet-box">
+      <p class="wallet-label">Carteira:</p>
+      <code id="walletAddress">
+        0x26Ef6c3AF50240F211E774213914f8DB526fA77d
       </code>
-
-      <button onclick="copyUSTD()" title="Copiar contrato">
-        📋
-      </button>
+      <button onclick="copyWallet()" title="Copiar carteira">📋</button>
     </div>
 
-    <div class="ustd-buttons">
+    <div class="contract-box">
+      <p class="contract-label">Contrato do Token:</p>
+      <code id="usdtAddress">
+        0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655
+      </code>
+      <button onclick="copyUSDT()" title="Copiar contrato">📋</button>
+    </div>
 
-      <button onclick="addUSTD()" class="wallet-btn">
-        🦊 Adicionar USTD à carteira
+    <div class="usdt-buttons">
+      <button onclick="addUSDT()" class="wallet-btn">
+        🦊 Adicionar USDT à carteira
       </button>
-
       <a
         href="https://etherscan.io/token/0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655"
         target="_blank"
         class="explorer-btn"
       >
-        Ver contrato
+        Ver no Etherscan
       </a>
-
     </div>
   </div>
-
 </div>
 
 <script>
-const USTD = {
-  address: "0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655",
-  symbol: "USTD",
-  decimals: 18,
-
-  // Se o contrato estiver na Ethereum Mainnet:
+const USDT = {
+  walletAddress: "0x26Ef6c3AF50240F211E774213914f8DB526fA77d",
+  contractAddress: "0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655",
+  symbol: "USDT",
+  decimals: 6,
   chainId: "0x1",
-
-  image: window.location.origin + "/ustd-icon.svg"
+  image: window.location.origin + "/usdt-icon.svg"
 };
 
-async function copyUSTD() {
-  await navigator.clipboard.writeText(USTD.address);
-
-  alert("Contrato USTD copiado!");
+async function copyWallet() {
+  await navigator.clipboard.writeText(USDT.walletAddress);
+  alert("0x26Ef6c3AF50240F211E774213914f8DB526fA77d");
 }
 
-async function addUSTD() {
+async function copyUSDT() {
+  await navigator.clipboard.writeText(USDT.contractAddress);
+  alert("✅ Contrato USDT copiado!");
+}
 
+async function addUSDT() {
   if (!window.ethereum) {
-    alert("Instale uma carteira Web3, como MetaMask, para adicionar o USTD.");
+    alert("⚠️ Instale o MetaMask ou outra carteira Web3 primeiro.");
     return;
   }
 
   try {
-
-    const wasAdded = await window.ethereum.request({
+    const added = await window.ethereum.request({
       method: "wallet_watchAsset",
       params: {
         type: "ERC20",
         options: {
-          address: USTD.address,
-          symbol: USTD.symbol,
-          decimals: USTD.decimals,
-          image: USTD.image
+          address: USDT.contractAddress,
+          symbol: USDT.symbol,
+          decimals: USDT.decimals,
+          image: USDT.image
         }
       }
     });
-
-    if (wasAdded) {
-      console.log("USTD adicionado à carteira!");
-    }
-
-  } catch (error) {
-    console.error(error);
-    alert("Não foi possível adicionar o USTD.");
+    if (added) console.log("✅ USDT adicionado à carteira!");
+  } catch (err) {
+    console.error(err);
+    alert("❌ Erro ao adicionar USDT.");
   }
 }
 </script>
